@@ -17,7 +17,7 @@ def sensor_temperatura(intervalo=0.5):
         with log_lock:
             print(f'[{timestamp}] Temperatura: {valor:.1f}°C às {timestamp}')
             
-        if valor > 30.0:
+        if valor > 25.0:
             alertas.put(f'ALERTA: Temperatura alta {valor:.1f}°C às {timestamp}')
             
         time.sleep(intervalo)
@@ -57,8 +57,8 @@ def sensor_luminosidade(intervalo=1.5):
         with log_lock:
             print(f'[{timestamp}] Luminosidade: {valor:.1f}%')
             
-        if valor < 20.0:
-            alertas.put('ALERTA: Luminosidade baixa {valor:.1f}')
+        if valor < 30.0:
+            alertas.put(f'ALERTA: Luminosidade baixa {valor:.1f}')
             
         time.sleep(intervalo)
 
