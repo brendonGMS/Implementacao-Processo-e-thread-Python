@@ -1,22 +1,13 @@
 from multiprocessing import Process
-import os
 
-#Implementação de Processos
+def tarefa():
+    print("Executando em um processo separado.")
 
-#Função Auxiliar
-def info(title):
-    print(title)
-    print('Module name: ', __name__)
-    print('Parent process: ', os.getppid()) #ID do processo pai
-    print('Process id: ', os.getpid()) #ID do processo atual
-    
-#Função que será executada no processo filho
-def f(name):
-    info('function f')
-    print('hello', name)
-    
-if __name__ == '__main__':
-    info('main line')
-    p = Process(target=f, args=('bob',))
-    p.start()
-    p.join()
+# Criando o processo
+p = Process(target=tarefa)
+
+# Iniciando o processo
+p.start()
+
+# Esperando o processo terminar
+p.join()

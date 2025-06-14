@@ -1,4 +1,4 @@
-import threading 
+import threading #Para criar Threads
 import time
 
 #Implementação de Threads
@@ -7,8 +7,8 @@ def tarefa(nome):
     time.sleep(2)
     print(f'Thread {nome} finalizada')
     
-t1 = threading.Thread(target=tarefa, args=('1'))
-t2 = threading.Thread(target=tarefa, args=('2'))
+t1 = threading.Thread(target=tarefa, args=('1',))
+t2 = threading.Thread(target=tarefa, args=('2',))
 
 #Iniciando as threads
 t1.start()
