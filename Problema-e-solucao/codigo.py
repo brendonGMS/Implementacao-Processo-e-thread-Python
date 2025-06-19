@@ -17,10 +17,11 @@ def sensor_temperatura(alertas, intervalo=0.5):
         valor = random.uniform(15.0, 35.0)
         timestamp = datetime.now().strftime('%H:%M:%S')
         
-        with log_lock:
+        with log_lock:  # Garante que a impressão não seja interrompida por outras threads
             print(f'[{timestamp}] Temperatura: {valor:.1f}°C')
             
         if valor > 25.0:
+            # Envia para a fila compartilhada
             alertas.put(f'ALERTA: Temperatura alta {valor:.1f}°C às {timestamp}')
             
         time.sleep(intervalo)
