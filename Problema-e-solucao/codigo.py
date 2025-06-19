@@ -12,7 +12,7 @@ log_lock = threading.Lock()
 def sensor_temperatura(intervalo=0.5):
     while True:
         valor = random.uniform(15.0, 35.0)
-        timestamp = datetime.now().strftime('%H:%M:%S.%f')
+        timestamp = datetime.now().strftime('%H:%M:%S')
         
         with log_lock:
             print(f'[{timestamp}] Temperatura: {valor:.1f}°C às {timestamp}')
@@ -34,7 +34,7 @@ def sensor_umidade(intervalo=1.0):
                 print(f"Valor realmente inválido detectado: {valor} (Tipo: {type(valor)})")
                 continue  # Pula para a próxima iteração
                 
-            timestamp = datetime.now().strftime("%H:%M:%S.%f")
+            timestamp = datetime.now().strftime("%H:%M:%S")
             
             with log_lock:
                 print(f"[{timestamp}] Umidade: {valor:.1f}%")
@@ -52,7 +52,7 @@ def sensor_umidade(intervalo=1.0):
 def sensor_luminosidade(intervalo=1.5):
     while True:
         valor = random.uniform(0.0, 100.0)
-        timestamp = datetime.now().strftime('%H:%M:%S.%f')
+        timestamp = datetime.now().strftime('%H:%M:%S')
         
         with log_lock:
             print(f'[{timestamp}] Luminosidade: {valor:.1f}%')
