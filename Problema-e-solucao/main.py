@@ -1,17 +1,20 @@
-from codigo import sensor_temperatura, sensor_umidade, sensor_luminosidade, processar_alertas
+from codigo import sensor_temperatura, sensor_umidade, sensor_luminosidade, processar_alertas, criar_fila_alertas
 import threading
 import multiprocessing
 import time
 
 def main():
+    # Cria a fila de alertas no processo principal
+    alertas = criar_fila_alertas()
+    
     sensores = [
-        threading.Thread(target=sensor_temperatura, daemon=True),
-        threading.Thread(target=sensor_umidade, daemon=True),
-        threading.Thread(target=sensor_luminosidade, daemon=True)
+        threading.Thread(target=sensor_temperatura, args=(alertas,), daemon=True),
+        threading.Thread(target=sensor_umidade, args=(alertas,), daemon=True),
+        threading.Thread(target=sensor_luminosidade, args=(alertas,), daemon=True)
     ]
     
-    alertas = multiprocessing.Process(target=processar_alertas, daemon=True)
-    alertas.start()
+    alertas_process = multiprocessing.Process(target=processar_alertas, args=(alertas,), daemon=True)
+    alertas_process.start()
     
     for sensor in sensores:
         sensor.start()
