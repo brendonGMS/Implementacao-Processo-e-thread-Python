@@ -22,8 +22,6 @@ def main():
     for sensor in sensores:
         sensor.start()
     
-    print("Sistema iniciado. Pressione Ctrl+C para parar.")
-    
     try:
         # Mantém o programa principal rodando até que o usuário pressione Ctrl+C
         while True:
